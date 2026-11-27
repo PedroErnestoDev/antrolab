@@ -1,5 +1,23 @@
 (() => {
 "use strict";
+
+const blogMatch=location.pathname.match(/^\\/blog\\/([^/]+)\\/?$/);
+if(blogMatch){
+ const canonical="https://antrolab.com.br/blog/"+blogMatch[1]+"/";
+ document.querySelector('link[rel="canonical"]')?.setAttribute("href",canonical);
+ document.querySelector('meta[property="og:url"]')?.setAttribute("content",canonical);
+ document.querySelectorAll('script[type="application/ld+json"]').forEach(node=>{
+  try{const data=JSON.parse(node.textContent);const fix=value=>{
+   if(Array.isArray(value))value.forEach(fix);
+   else if(value&&typeof value==="object")Object.keys(value).forEach(key=>{
+    if(typeof value[key]==="string"&&value[key]==="https://antrolab.com.br/blog/"+blogMatch[1]+".html")value[key]=canonical;
+    else fix(value[key]);
+   });
+  };fix(data);node.textContent=JSON.stringify(data);
+  }catch(error){console.warn("[AntroLab SEO] JSON-LD não pôde ser normalizado",error)}
+ });
+}
+
 const TOOLS=[
 {name:"Compressor de imagens",desc:"Reduza o tamanho de JPG, PNG e WebP mantendo o formato original.",icon:"images",category:"Imagens",url:"/ferramentas/compressor-imagem.html",tags:"compressão otimização jpg png webp"},
 {name:"Conversor de imagens",desc:"Converta imagens entre PNG, JPEG e WebP.",icon:"repeat-2",category:"Imagens",url:"/ferramentas/conversor-imagem.html",tags:"conversor formato imagem"},
