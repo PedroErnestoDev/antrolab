@@ -1,2 +1,0 @@
-/* Slots publicitários AntroLab. Permanecem desativados até a inclusão dos códigos oficiais. */
-(()=>{const enabled=false;if(!enabled)return;document.querySelectorAll("[data-ad-slot]").forEach(slot=>{slot.hidden=false;slot.classList.add("ad-slot")})})();
