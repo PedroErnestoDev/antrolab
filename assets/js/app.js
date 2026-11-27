@@ -11,12 +11,12 @@ function prepareAdSlots(){
  if(document.querySelector("#tool-catalog")){const anchor=document.querySelector(".catalog-controls");if(anchor&&!document.querySelector('[data-ad-kind="native"]'))anchor.before(makeAdSlot("native"))}
  if(document.querySelector("[data-tool]")){const anchor=document.querySelector(".tool-workspace");if(anchor&&!document.querySelector('[data-ad-kind="rectangle"]'))anchor.after(makeAdSlot("rectangle"))}
 }
-function appendAdScript(src,async=true){const s=document.createElement("script");s.src=src;s.async=async;s.setAttribute("data-cfasync","false");document.head.append(s);return s}
+function appendAdScript(src,container,async=true){const s=document.createElement("script");s.src=src;s.async=async;s.setAttribute("data-cfasync","false");container.append(s);return s}
 function loadAds(){if(window.__antrolabAdsLoaded)return;window.__antrolabAdsLoaded=true;prepareAdSlots();
  document.querySelectorAll(".ad-slot").forEach(slot=>{slot.dataset.enabled="true";const target=slot.querySelector(".ad-content");if(!target)return;
- if(slot.dataset.adKind==="native"){target.id="container-bd66deb3de0d53db0";target.id="container-bd66deb3de0d53db0";appendAdScript("https://bauval.org/21/bd4504a95cb4c70bd66deb3de0d53db0",true)}
- if(slot.dataset.adKind==="rectangle"){window.atOptions={key:"6764fe749db049f75a1761b1a7223cd8",format:"iframe",height:250,width:300,params:{}};appendAdScript("https://bauval.org/22/6764fe749db049f75a1761b1a7223cd8",false)}
- if(slot.dataset.adKind==="leaderboard"){window.atOptions={key:"8d2522e9c4af6cef77ec4e422b507b50",format:"iframe",height:90,width:728,params:{}};appendAdScript("https://bauval.org/22/8d2522e9c4af6cef77ec4e422b507b50",false)}
+ if(slot.dataset.adKind==="native"){target.id="container-bd66deb3de0d53db0";appendAdScript("https://bauval.org/21/bd4504a95cb4c70bd66deb3de0d53db0",target,true)}
+ if(slot.dataset.adKind==="rectangle"){const options=document.createElement("script");options.textContent="atOptions = "+JSON.stringify({key:"6764fe749db049f75a1761b1a7223cd8",format:"iframe",height:250,width:300,params:{}})+";";target.append(options);appendAdScript("https://bauval.org/22/6764fe749db049f75a1761b1a7223cd8",target,false)}
+ if(slot.dataset.adKind==="leaderboard"){const options=document.createElement("script");options.textContent="atOptions = "+JSON.stringify({key:"8d2522e9c4af6cef77ec4e422b507b50",format:"iframe",height:90,width:728,params:{}})+";";target.append(options);appendAdScript("https://bauval.org/22/8d2522e9c4af6cef77ec4e422b507b50",target,false)}
  });
 }
 function applyConsent(choice){let saved=false;try{localStorage.setItem(CONSENT_KEY,choice);localStorage.setItem(ADS_CONSENT_KEY,choice);saved=true}catch(e){}if(saved){window.location.reload();return}document.querySelector("#cookie-consent")?.remove()}
