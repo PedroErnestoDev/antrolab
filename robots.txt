@@ -1,1 +1,3 @@
-User-agent: *\nAllow: /\nSitemap: https://antrolab.com.br/sitemap.xml\n
+User-agent: *
+Allow: /
+Sitemap: https://antrolab.com.br/sitemap.xml
