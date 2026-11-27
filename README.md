@@ -1,37 +1,44 @@
 # AntroLab
 
-Portal estático de ferramentas online gratuitas, desenvolvido com HTML5, CSS3 e JavaScript Vanilla.
+Portal de ferramentas online gratuitas, desenvolvido com HTML5 semântico, CSS3 e JavaScript Vanilla (ES6+). O projeto é estático e publicado pelo GitHub Pages, sem etapa de build.
 
-## Desenvolvimento
+## Experiência e arquitetura
 
-Não há etapa de build. O projeto é servido diretamente pelo GitHub Pages.
+- Interface responsiva com tema claro/escuro.
+- Catálogo pesquisável e filtros por categoria.
+- Navegação e componentes compartilhados gerados por JavaScript.
+- Ferramentas executadas no navegador sempre que possível.
+- Preferências de tema, histórico e consentimento armazenados localmente.
+- Integrações de Google Analytics 4 e Adsterra carregadas conforme as preferências de consentimento.
+
+## Ferramentas
+
+- Compressor de imagens JPG, PNG e WebP, preservando o formato original.
+- Conversor de imagens entre PNG, JPEG e WebP.
+- Redimensionador de imagens com controle de proporção.
+- Conversão PNG para WebP e JPG/JPEG para PNG.
+- Gerador de QR Code.
+- Contador de palavras, caracteres, frases e parágrafos.
+- Formatador de texto.
+
+O recurso de PDF permanece fora do catálogo enquanto não houver implementação funcional.
 
 ## Publicação no GitHub Pages
 
-1. Abra **Settings → Pages** no repositório.
-2. Em **Build and deployment**, selecione **Deploy from a branch**.
-3. Escolha a branch principal e a pasta **/(root)**.
-4. Salve e aguarde a publicação.
-5. Em **Custom domain**, informe `antrolab.com.br` e confirme.
-6. Configure no DNS do domínio os registros A para os endereços oficiais atuais do GitHub Pages e um CNAME de `www` para `PedroErnestoDev.github.io`.
-7. Após a validação DNS, habilite **Enforce HTTPS**.
+1. Em **Settings → Pages**, selecione **Deploy from a branch**.
+2. Escolha a branch principal e a pasta **/(root)**.
+3. Confirme o domínio personalizado `antrolab.com.br`.
+4. Configure os registros DNS conforme a documentação oficial do GitHub Pages.
+5. Após a validação, habilite **Enforce HTTPS**.
 
-O arquivo `CNAME` já contém `antrolab.com.br`. Consulte a documentação oficial do GitHub Pages para os endereços IP atuais e instruções de DNS: https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site
+O arquivo `CNAME` contém `antrolab.com.br`. Consulte: https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site
 
-## Ferramentas implementadas
+## Qualidade e manutenção
 
-- Compressor de imagem: Canvas API, qualidade configurável e exportação.
-- Conversor de imagem: exportação para WebP.
-- Redimensionador: alteração de dimensões via Canvas.
-- PNG para WebP e JPG para PNG.
-- QR Code: biblioteca QRCode.js carregada via CDN.
-- Contador de palavras e caracteres.
-- Formatação de texto: caixa, capitalização e espaços.
+- O workflow em `.github/workflows/quality.yml` executa verificações de sintaxe JavaScript.
+- A lista de testes manuais está em `docs/QA-CHECKLIST.md`.
+- Antes de publicar mudanças, testar as ferramentas em navegadores desktop e mobile.
+- Revisar periodicamente políticas de privacidade, cookies e termos. O canal de contato deve refletir um endereço real e monitorado.
+- Bibliotecas externas são carregadas por CDN; fixe versões e avalie hospedagem local se for necessário reduzir dependências de terceiros.
 
-## Observações importantes
-
-- O utilitário PDF está identificado como indisponível; não anuncia operações ainda não implementadas.
-- Os componentes publicitários estão reservados para integração futura. Nenhum código de anúncio foi inserido.
-- Antes de lançar, revisar juridicamente as páginas de termos, privacidade e cookies, preencher os canais reais de contato e testar as ferramentas nos navegadores/dispositivos alvo.
-- Bibliotecas externas são carregadas por CDN; para operação independente de terceiros, fixe versões e hospede os arquivos localmente após revisar suas licenças.
-- Os caminhos absolutos iniciados por `/` pressupõem publicação na raiz do domínio personalizado antrolab.com.br.
+Os caminhos absolutos iniciados por `/` pressupõem publicação na raiz do domínio personalizado `antrolab.com.br`.
