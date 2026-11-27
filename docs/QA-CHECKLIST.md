@@ -14,14 +14,17 @@ Este checklist separa revisão estática de testes reais no navegador. Os itens 
 ## Ferramentas de imagem
 Executar em JPG, PNG com transparência e WebP:
 - [ ] Compressor: seleção por botão e arrastar/soltar.
-- [ ] Compressor: qualidade configurável em JPEG/WebP; PNG mantém exportação sem perdas.
-- [ ] Conversor: exportação WebP e validação do tipo MIME real baixado.
-- [ ] PNG para WebP: arquivo baixado abre e mantém dimensões.
-- [ ] JPG para PNG: arquivo baixado abre e fundo é tratado corretamente.
+- [ ] Compressor: qualidade configurável em JPEG/WebP; PNG é exportado como WebP para permitir compressão ajustável.
+- [ ] Conversor: selecionar PNG, JPEG e WebP; validar MIME e extensão reais do arquivo baixado.
+- [ ] PNG para WebP: aceitar PNG e rejeitar JPG/WebP; arquivo baixado abre e mantém dimensões.
+- [ ] JPG para PNG: aceitar JPG/JPEG e rejeitar PNG/WebP; arquivo baixado abre e fundo é tratado corretamente.
 - [ ] Redimensionador: dimensões personalizadas, proporção ligada/desligada e limites.
 - [ ] Prévia, metadados, mensagens de erro e download funcionam.
 - [ ] Testar arquivo inválido, arquivo acima de 30 MB e imagem acima de 40 MP.
 - [ ] Testar navegadores Chromium, Firefox e Safari/WebKit, desktop e Android.
+
+## PDF
+- [ ] A página PDF permanece identificada como indisponível e não aparece no catálogo até existir implementação real.
 
 ## Texto e QR Code
 - [ ] Contador com texto vazio, acentos, emojis, quebras de linha e pontuação.
