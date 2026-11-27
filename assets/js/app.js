@@ -1,33 +1,21 @@
 (() => {
 "use strict";
 
-const blogMatch=location.pathname.match(/^\\/blog\\/([^/]+)\\/?$/);
-if(blogMatch){
- const canonical="https://antrolab.com.br/blog/"+blogMatch[1]+"/";
- document.querySelector('link[rel="canonical"]')?.setAttribute("href",canonical);
- document.querySelector('meta[property="og:url"]')?.setAttribute("content",canonical);
- document.querySelectorAll('script[type="application/ld+json"]').forEach(node=>{
-  try{const data=JSON.parse(node.textContent);const fix=value=>{
-   if(Array.isArray(value))value.forEach(fix);
-   else if(value&&typeof value==="object")Object.keys(value).forEach(key=>{
-    if(typeof value[key]==="string"&&value[key]==="https://antrolab.com.br/blog/"+blogMatch[1]+".html")value[key]=canonical;
-    else fix(value[key]);
-   });
-  };fix(data);node.textContent=JSON.stringify(data);
-  }catch(error){console.warn("[AntroLab SEO] JSON-LD não pôde ser normalizado",error)}
- });
+const blogPath=location.pathname;
+let blogSlug="";
+if(blogPath.startsWith("/blog/")){
+ blogSlug=blogPath.slice(6);
+ if(blogSlug.endsWith("/"))blogSlug=blogSlug.slice(0,-1);
 }
-
-const blogMatch=location.pathname.match(/^\/blog\/([^/]+)\/?$/);
-if(blogMatch){
- const canonical="https://antrolab.com.br/blog/"+blogMatch[1]+"/";
+if(blogSlug&&!blogSlug.includes("/")){
+ const canonical="https://antrolab.com.br/blog/"+blogSlug+"/";
  document.querySelector('link[rel="canonical"]')?.setAttribute("href",canonical);
  document.querySelector('meta[property="og:url"]')?.setAttribute("content",canonical);
  document.querySelectorAll('script[type="application/ld+json"]').forEach(node=>{
   try{const data=JSON.parse(node.textContent);const fix=value=>{
    if(Array.isArray(value))value.forEach(fix);
    else if(value&&typeof value==="object")Object.keys(value).forEach(key=>{
-    if(typeof value[key]==="string"&&value[key]==="https://antrolab.com.br/blog/"+blogMatch[1]+".html")value[key]=canonical;
+    if(typeof value[key]==="string"&&value[key]==="https://antrolab.com.br/blog/"+blogSlug+".html")value[key]=canonical;
     else fix(value[key]);
    });
   };fix(data);node.textContent=JSON.stringify(data);
